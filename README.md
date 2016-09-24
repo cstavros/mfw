@@ -27,7 +27,7 @@ http://web.chal.csaw.io:8000/.git/
 
 Information security professionals warn that publicly revealing a website's source code leaves it open to vulnerabilities (https://en.internetwache.org/dont-publicly-expose-git-or-how-we-downloaded-your-websites-sourcecode-an-analysis-of-alexas-1m-28-07-2015/).
 
-We can retrieve the source code through this command:
+We can use this publically exposed .git directory to retreive the website source code:
 
     wget --mirror -I .git http://web.chal.csaw.io:8000/.git/
 ---
