@@ -31,7 +31,7 @@ We can use this publically exposed .git directory to retreive the website source
 
     wget --mirror -I .git http://web.chal.csaw.io:8000/.git/
 ---
-Now that we have the source code, we can review the files in the GitHub directory. One source file states this:
+Now that we have the source code, we can review the files in the GitHub directory. Now that we have the .git/ directory we can review the files in the GitHub directory. One source file states this:
 
     # git ls-files --others --exclude-from=.git/info/exclude
     # Lines that start with '#' are comments.
