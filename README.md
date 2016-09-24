@@ -28,18 +28,12 @@ http://web.chal.csaw.io:8000/.git/
 Information security professionals warn that publicly revealing a website's source code leaves it open to vulnerabilities (https://en.internetwache.org/dont-publicly-expose-git-or-how-we-downloaded-your-websites-sourcecode-an-analysis-of-alexas-1m-28-07-2015/).
 
 We can use this publically exposed .git directory to retreive the website source code:
+We used wget to download that .git/ directory of, use curl for Mac users. No
 
     wget --mirror -I .git http://web.chal.csaw.io:8000/.git/
 ---
-Now that we have the source code, we can review the files in the GitHub directory. Now that we have the .git/ directory we can review the files in the GitHub directory. One source file states this:
+Now that we have the .git/ directory, we can explore the files in the Git repository. 
 
-    # git ls-files --others --exclude-from=.git/info/exclude
-    # Lines that start with '#' are comments.
-    # For a project mostly in C, the following would be a good set of
-    # exclude patterns (uncomment them if you want to use them):
-    # *.[oa]
-    # *~
----
 By typing in the following command we can get the status of proposed and deleted changes:
 
     $ git status | head -n 10
@@ -55,16 +49,16 @@ Which retrieves the following file statuses:
 
 we ran "git checkout -- " . to obtain the source files from the git repo
 
-Next, we look at the current files in the directory:
+Next, we looked  at the current files in the directory:
 
-    $ ls | head -n 10
+    $ ls
 
-Which retrieves the following files:
+Which shows that the following files exist:
 
     index.php
     templates
     
-We examined the index.php file we found that it used assert, so we injected quotes
+We examined the index.php file we found that it used assert, so next we injected quotes
 ---    
 
 
