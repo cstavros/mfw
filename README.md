@@ -52,6 +52,9 @@ Which retrieves the following file statuses:
     deleted:    templates/flag.php
     deleted:    templates/home.php
 ---
+
+we ran "git checkout -- " . to obtain the source files from the git repo
+
 Next, we look at the current files in the directory:
 
     $ ls | head -n 10
