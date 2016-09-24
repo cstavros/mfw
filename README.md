@@ -63,6 +63,8 @@ Which retrieves the following files:
 
     index.php
     templates
+    
+We examined the index.php file we found that it used assert, so we injected quotes
 ---    
 
 
