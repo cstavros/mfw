@@ -111,3 +111,5 @@ Within this directory we saw flag.php. We examined flag.php next.
 Lastly, we used the cat command to print out the flag.php contents. We were still in the home directory, so we used the relative path `templates/flag.php` through `http://web.chal.csaw.io:8000/?page=home%27).%20system("cat%20templates/flag.php")%20//`:
 
 ![screen shot](https://cloud.githubusercontent.com/assets/22091364/18804402/4769ba94-81c8-11e6-988d-3f066bad6cc6.png)
+
+*Many thanks to prole for helping me edit this write-up*
